@@ -20,5 +20,5 @@ make
 ```
 git clone https://github.com/synth9283/ytt.git
 cd ytt/
-make flags="-O3 `pkg-config --cflags --libs gtk3`"
+make flags="-O3 `pkg-config --cflags --libs gtk4`"
 ```
