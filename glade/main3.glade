@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.1 -->
 <interface>
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="gtk+" version="3.24"/>
   <object class="GtkWindow" id="windowMain">
-    <property name="can-focus">0</property>
+    <property name="can-focus">False</property>
     <property name="default-width">800</property>
     <property name="default-height">500</property>
     <signal name="destroy" handler="on_windowMain_destroy" swapped="no"/>
-    <property name="child">
+    <child>
       <object class="GtkFixed">
         <property name="width-request">800</property>
         <property name="height-request">500</property>
-        <property name="can-focus">0</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
         <child>
           <object class="GtkEntry" id="entryUrl">
             <property name="width-request">800</property>
             <property name="height-request">30</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
             <property name="max-length">100</property>
             <property name="primary-icon-name">search</property>
             <property name="primary-icon-tooltip-text" translatable="yes">Enter url here</property>
@@ -25,30 +29,29 @@
         </child>
         <child>
           <object class="GtkProgressBar" id="progressDownload">
-            <layout>
-              <property name="transform">translate(0, 480)</property>
-            </layout>
             <property name="width-request">650</property>
             <property name="height-request">20</property>
-            <property name="can-focus">0</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
           </object>
+          <packing>
+            <property name="y">480</property>
+          </packing>
         </child>
         <child>
           <object class="GtkImage" id="imageVideo">
-            <layout>
-              <property name="transform">translate(0, 30)</property>
-            </layout>
             <property name="width-request">650</property>
             <property name="height-request">450</property>
-            <property name="can-focus">0</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
             <property name="icon-name">dialog-error</property>
           </object>
+          <packing>
+            <property name="y">30</property>
+          </packing>
         </child>
         <child>
           <object class="GtkFileChooserButton" id="buttonSave">
-            <layout>
-              <property name="transform">translate(650, 450)</property>
-            </layout>
             <property name="width-request">150</property>
             <property name="height-request">50</property>
             <property name="visible">True</property>
@@ -57,8 +60,12 @@
             <property name="title" translatable="yes">Location</property>
             <signal name="file-set" handler="on_saveButton_file_set" swapped="no"/>
           </object>
+          <packing>
+            <property name="x">650</property>
+            <property name="y">450</property>
+          </packing>
         </child>
       </object>
-    </property>
+    </child>
   </object>
 </interface>

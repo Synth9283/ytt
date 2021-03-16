@@ -1,5 +1,5 @@
 #pragma once
-#include <gtk-3.0/gtk/gtk.h>
+#include <gtk-4.0/gtk/gtk.h>
 
 typedef struct {
     GtkWidget *windowMain, *entryUrl, *buttonSave, *progressDownload, *imageVideo;
