@@ -1,26 +1,37 @@
 #include <gtk-4.0/gtk/gtk.h>
-#include "libs/yttWidgets.h"
+#include "libs/yttGObject.h"
+
+void activate(GtkApplication *app, gpointer data);
+void printUrl(GtkWidget *widget, gpointer data);
 
 int main(int argc, char **argv) {
-    yttWidget_t yttWidget;
-    GtkBuilder *builder;
+    int status;
+    GtkApplication *app;
+    
+    app = gtk_application_new("ytt", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
 
-    gtk_init();
-    builder = gtk_builder_new_from_file("glade/main.glade");
-    yttWidget.windowMain = GTK_WIDGET(gtk_builder_get_object(builder, "windowMain"));
-    yttWidget.entryUrl = GTK_WIDGET(gtk_builder_get_object(builder, "entryUrl"));
-    // yttWidget.buttonSave = GTK_WIDGET(gtk_builder_get_object(builder, "buttonSave"));
-    yttWidget.progressDownload = GTK_WIDGET(gtk_builder_get_object(builder, "progressDownload"));
-    yttWidget.imageVideo = GTK_WIDGET(gtk_builder_get_object(builder, "imageVideo"));
+    status = g_application_run(G_APPLICATION(app), argc, argv);
+    g_object_unref(app);
 
-    g_object_unref(builder);
-    gtk_widget_show(yttWidget.windowMain);
-    g_main_run(yttWidget.windowMain);
-
-    return 0;
+    return status;
 }
 
-// void on_windowMain_destroy()
-// {
-//     g_main_quit(NULL);
-// }
+void activate(GtkApplication *app, gpointer data) {
+    yttGObject_t yttGObject;
+    GtkBuilder *builder = gtk_builder_new_from_file("glade/main.glade");
+    yttGObject.windowMain = gtk_builder_get_object(builder, "windowMain");
+    gtk_window_set_application(GTK_WINDOW(yttGObject.windowMain), app);
+    g_signal_connect(yttGObject.windowMain, "destroy", G_CALLBACK(gtk_window_destroy), yttGObject.windowMain);
+    yttGObject.entryUrl = gtk_builder_get_object(builder, "entryUrl");
+    g_signal_connect(yttGObject.entryUrl, "changed", G_CALLBACK(printUrl), NULL);
+    // yttGObject.buttonSave = GTK_WIDGET(gtk_builder_get_object(builder, "buttonSave"));
+    yttGObject.progressDownload = gtk_builder_get_object(builder, "progressDownload");
+    yttGObject.imageVideo = gtk_builder_get_object(builder, "imageVideo");
+
+    g_object_unref(builder);
+}
+
+void printUrl(GtkWidget *widget, gpointer data) {
+    g_print("prntUrl\n");
+}
