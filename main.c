@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
     int status;
     GtkApplication *app;
     
-    app = gtk_application_new("ytt", G_APPLICATION_FLAGS_NONE);
+    app = gtk_application_new("org.gtk.ytt", G_APPLICATION_FLAGS_NONE);
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
 
     status = g_application_run(G_APPLICATION(app), argc, argv);
@@ -25,9 +25,11 @@ void activate(GtkApplication *app, gpointer data) {
     g_signal_connect(yttGObject.windowMain, "destroy", G_CALLBACK(gtk_window_destroy), yttGObject.windowMain);
     yttGObject.entryUrl = gtk_builder_get_object(builder, "entryUrl");
     g_signal_connect(yttGObject.entryUrl, "changed", G_CALLBACK(printUrl), NULL);
-    // yttGObject.buttonSave = GTK_WIDGET(gtk_builder_get_object(builder, "buttonSave"));
+    // yttGObject.buttonSave = gtk_builder_get_object(builder, "buttonSave");
     yttGObject.progressDownload = gtk_builder_get_object(builder, "progressDownload");
     yttGObject.imageVideo = gtk_builder_get_object(builder, "imageVideo");
+
+    gtk_widget_show(GTK_WIDGET(yttGObject.windowMain));
 
     g_object_unref(builder);
 }
